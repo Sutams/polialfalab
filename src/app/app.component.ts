@@ -11,38 +11,73 @@ export class AppComponent {
 }
 
 // Definición de las variables
-// Sentence to code
-let sentence : string = "HELLO WORLD";
-// Sequence to code with
-let seq : string = "C1C2C1C1";
-// Keys to code
-let C1 : number = 5;
-let C2 : number = 19;
-// If true then code, false decode
-let code : boolean = true;
-let alphabet : string = "ABCDEFGHIJKLMNÑOPQRSTUVWYZ"
-var arr : string[] = alphabet.split(String.fromCharCode(65+C1));
-var arrc1 = arr[1].concat(arr[0].toString());
-console.log(arrc1);
-var ltr = sentence.split('');
+let txt: string = "HOLA SOY ANGELINA"; // texto a cifrar
+let seqStr = "C1C2C2C1C2"; // secuencia ingresada a cifrar
+let C1: number = 5; // claves para mover el ABCdario
+let C2: number = 19;
+let code: boolean = true; // Si es verdadero se cifra, sino se descifra
+let abc: string = "ABCDEFGHIJKLMNÑOPQRSTUVWYZ"
 
-var arr : string[] = alphabet.split(String.fromCharCode(65+C2));
-var arrc2 = arr[1].concat(arr[0].toString());
-console.log(arrc2);
-var ltr = sentence.split('');
+// Crea arreglo con la secuencia numérica
+var seqArr = seqStr.split('C');
+var seqNum = [];
+for (let i = 0; i < seqArr.length; i++) {
+  seqNum[i] = +seqArr[i];
+}
+seqNum.splice(0, 1);
 
-codeSentence(alphabet, sentence,seq,C1,C2);
-function codeSentence(abc:string, sentence:string, seq:string, C1:number, C2:number) {
-  var ltr = sentence.split('');
-  var i:any; 
-  for(i in ltr) {
-    var num = ltr[i].charCodeAt(0); //convert letter character to it's ASCII code
-    console.log(num);
-    num = num + C1;
-    ltr[i] = String.fromCharCode(num);
-    console.log(ltr[i]);
+// Crear arreglos desplazados en C1 y C2
+var arrABC = abc.split('');
+var arrC1: string[] = [];
+var arrC2: string[] = [];
+
+for (let i = C1; i < arrABC.length; i++) {
+  arrC1.push(arrABC[i]);
+}
+for (let i = 0; i < C1; i++) {
+  arrC1.push(arrABC[i]);
+}
+
+for (let i = C2; i < arrABC.length; i++) {
+  arrC2.push(arrABC[i]);
+}
+for (let i = 0; i < C2; i++) {
+  arrC2.push(arrABC[i]);
+}
+
+// Crear mapas
+type MapType = { [id: string]: string; }
+
+const mapC1: MapType = {};
+const mapC2: MapType = {};
+mapC1[" "]= "X";
+mapC2[" "]= "X";
+
+for (let i = 0; i < arrABC.length; i++) {
+  mapC1[arrABC[i]] = arrC1[i];
+}
+for (let i = 0; i < arrABC.length; i++) {
+  mapC2[arrABC[i]] = arrC2[i];
+}
+
+// Función para cifrar el texto
+codeTxt(txt, seqNum, mapC1, mapC2);
+function codeTxt(txt: string, seq: number[], mapC1: MapType, mapC2: MapType) {
+  var Alter : string[]=[];
+  var ltr = txt.split('');
+
+  for (let i in ltr) {
+    var j = +i%seq.length;
+
+    if (seq[j] == 1) {
+      Alter[i] = mapC1[ltr[i]];
+    }
+    else{
+      Alter[i] = mapC2[ltr[i]];
+    }
+
   }
-  var str = ltr.join();
+  var str = Alter.join('');
   console.log(str);
 
   //return codedSentence;
