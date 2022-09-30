@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { refCount } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -63,21 +62,40 @@ for (let i = 0; i < arrABC.length; i++) {
 // Función para cifrar el texto
 codeTxt(txt, seqNum, mapC1, mapC2);
 function codeTxt(txt: string, seq: number[], mapC1: MapType, mapC2: MapType) {
-  var Alter : string[]=[];
   var ltr = txt.split('');
 
   for (let i in ltr) {
     var j = +i%seq.length;
 
     if (seq[j] == 1) {
-      Alter[i] = mapC1[ltr[i]];
+      ltr[i] = mapC1[ltr[i]];
     }
     else{
-      Alter[i] = mapC2[ltr[i]];
+      ltr[i] = mapC2[ltr[i]];
     }
-
   }
-  var str = Alter.join('');
+  var str = ltr.join('');
+  console.log(str);
+
+  //return codedSentence;
+}
+
+// Función para descifrar el texto
+codeTxt(txt, seqNum, mapC1, mapC2);
+function decodeTxt(txt: string, seq: number[], mapC1: MapType, mapC2: MapType) {
+  var ltr = txt.split('');
+
+  for (let i in ltr) {
+    var j = +i%seq.length;
+
+    if (seq[j] == 1) {
+      ltr[i] = mapC1[ltr[i]];
+    }
+    else{
+      ltr[i] = mapC2[ltr[i]];
+    }
+  }
+  var str = ltr.join('');
   console.log(str);
 
   //return codedSentence;
