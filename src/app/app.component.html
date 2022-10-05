@@ -5,8 +5,8 @@
     <div class="container-fluid">
       <!-- Navbar brand -->
       <a class="navbar-brand"><img src=""></a>
-  
-  
+
+
       <!-- Toggle button -->
       <button class="navbar-toggler" type="button" aria-expanded="false"
         aria-label="Toggle navigation">
@@ -16,18 +16,33 @@
     <!-- Container wrapper -->
   </nav>
   <!-- Navbar -->
-  
+
   <div class="container text-center">
     <!-- Stack the columns on mobile by making one full-width and the other half-width -->
     <div class="row">
       <div class="col-md-8">
-        <p>parte izquierda</p>
+        <p>Cifrar</p>
+        <form class="example-form">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Ingrese texto a cifrar</mat-label>
+            <input matInput placeholder="HOLA MUNDO" value="">
+          </mat-form-field>
+        </form>
       </div>
+
       <div class="col-6 col-md-4">
-        <p>parte derecha!</p>
+        <p>Descifrar</p>
+        <form class="example-form">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Esperando texto a cifrar</mat-label>
+            <input matInput disabled="" value="">
+          </mat-form-field>
+        </form>
+
       </div>
     </div>
-  
+
       <div class="col-md-8">
         <p>parte abajo</p>
+        <button mat-raised-button>Cambiar</button>
       </div>
