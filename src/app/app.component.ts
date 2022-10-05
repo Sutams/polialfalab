@@ -1,4 +1,3 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component } from '@angular/core';
 
 type MapType = { [id: string]: string; }
@@ -17,7 +16,7 @@ export class AppComponent {
   seqStr = ""; // secuencia a ingresar
   C1: number = 5; // claves para mover el ABCdario
   C2: number = 19;
-  cifrar: boolean = true; // Si es verdadero se cifra, sino se descifra
+  cifrar: boolean = true; // si es verdadero se cifra, sino se descifra
   abc: string = "ABCDEFGHIJKLMNÑOPQRSTUVWYZ"
   
   cambiarCifrar(){
@@ -43,8 +42,8 @@ export class AppComponent {
     }
   }
 
+  // Crea arreglo con la secuencia numérica C1C2... --> ,1,2,
   newSequence() : number[]{
-    // Crea arreglo con la secuencia numérica
     var seqArr = this.seqStr.split('C'); // Esto quita todas las C's y deja un arreglo de sólo caracteres
     var seqNum = [];
     for (let i = 0; i < seqArr.length; i++) {
@@ -53,8 +52,9 @@ export class AppComponent {
     seqNum.splice(0, 1); // Se saca el primer valor, que está indefinido
     return seqNum;
   }
-
-  moveArrayK(K:number) : string[]{ // Mueve el arreglo ABC en K veces a la izquierda
+  
+  // Mueve el arreglo ABC en K veces a la izquierda
+  moveArrayK(K:number) : string[]{ 
     var arrABC = this.abc.split(''); // Separa arreglo en cada letra
     var arr: string[] = []; // Crea arreglo vacío
     
