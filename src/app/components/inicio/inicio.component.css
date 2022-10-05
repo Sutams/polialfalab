@@ -1,0 +1,35 @@
+.superior{
+
+    background: rgb(92, 51, 51);
+    justify-content: left;
+    border: rgb(255, 255, 255);
+    
+}
+.body{
+    background-color: rgb(51, 51, 51);
+    height: 100%;
+    color: rgb(226, 211, 43);
+}
+
+.derecha,.izquierda{
+    justify-content: left;
+    text-align: left;
+
+}
+.valorC1{
+
+    width: 150px;
+}
+
+.valorC2{
+
+    width: 150px;
+}
+
+.clave{
+
+    width: 500px;
+}
+
+
+

@@ -1,0 +1,101 @@
+<div class="body"> 
+ <!-- Navbar -->
+  <nav class="navbar">
+    <!-- Container wrapper -->
+    <div class="container-fluid superior">
+      <!-- Navbar brand -->
+      <img class ="patito"src="/assets/img/patito.png" width="6%">
+      <h1>Cifrado Polialfabetico</h1> 
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+  <br><br>
+  
+  <div class="container text-center">
+    <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+    <!--Reglas-->
+    <h1>Reglas</h1>
+    <h3>- C1 y C2 puede tener valores entre 1 y 26</h3>
+    <h3>- Texto tiene que estar en mayuscula</h3>
+    <h3>- No se puede ocupar la letra X en el texto</h3>
+    <h3>- La clave puede tener entre 2 y 6 elementos conmbinados</h3>
+
+    <!-- Cifrar-->
+    <div *ngIf="modo=='cifrar'" class="row">
+      
+      <div class="col-md-5 izquierda" >
+        <h1> Cifrar</h1>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Ingrese texto Ej: HOLA MUNDO" required> 
+        </div> 
+      </div>
+
+      <div class="col-md-2 " >
+        <div class="example-button-container">
+          <button (click)="cambiarDecifrar()"mat-fab color="warn" aria-label="Example icon button with a home icon">
+            <mat-icon>sync_alt</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-5 derecha">
+        <h1> Decifrar</h1>  
+        <div class="form-group">
+          <textarea class="form-control" readonly rows="3" ></textarea> 
+        </div>
+      </div>
+    </div>
+
+    <!-- Decifrar-->
+    <div *ngIf="modo=='decifrar'" class="row">
+      
+      <div class="col-md-5 izquierda" >
+        <h1> Decifrar</h1>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Ingrese texto Ej: HOLA MUNDO" required> 
+        </div> 
+      </div>
+
+      <div class="col-md-2 " >
+        <div class="example-button-container">
+          <button (click)="cambiarCifrar()" mat-fab color="warn" aria-label="Example icon button with a home icon">
+            <mat-icon>sync_alt</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-5 derecha">
+        <h1> Cifrar</h1>  
+        <div class="form-group">
+          <textarea class="form-control" readonly rows="3" ></textarea> 
+        </div>
+      </div>
+      
+    </div>
+    <div class="row"> 
+
+      <div class="col-md-1 " >
+        <div class="example-button-row">
+          <button mat-raised-button color="warn">C1</button>
+        </div>
+      </div>
+      <div class="col-md-1 valorC1">
+        <input type="number" maxlength="2"class="form-control" placeholder="Valor de K" min="2" max="26"> 
+      </div>
+      <div class="col-md-1 " >
+        <div class="example-button-row">
+          <button mat-raised-button color="warn">C2</button>
+        </div>
+      </div>
+      <div class="col-md-2 valorC2">
+        <input type="number" maxlength="2"class="form-control" placeholder="Valor de K" min="2" max="26"> 
+      </div>
+    </div>
+    <br>
+    <div class="form-group clave">
+      <input type="text" class="form-control" placeholder="Ingrese la clave Ej: C1C1C2C1C2C1" required> 
+    </div>
+  </div>
+  
+</div>
