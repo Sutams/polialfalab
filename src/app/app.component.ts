@@ -10,9 +10,9 @@ export class AppComponent {
 }
 
 // Definición de las variables
-let txt: string = "HOLA SOY ANGELINA"; // texto a cifrar
+let txt: string = "HOLA MUNDO"; // texto a cifrar
 let seqStr = "C1C2C2C1C2"; // secuencia ingresada a cifrar
-let C1: number = 5; // claves para mover el ABCdario
+let C1: number = 10; // claves para mover el ABCdario
 let C2: number = 19;
 let code: boolean = true; // Si es verdadero se cifra, sino se descifra
 let abc: string = "ABCDEFGHIJKLMNÑOPQRSTUVWYZ"
@@ -30,17 +30,17 @@ var arrABC = abc.split('');
 var arrC1: string[] = [];
 var arrC2: string[] = [];
 
-for (let i = C1; i < arrABC.length; i++) {
+for (let i = arrABC.length-C1; i >= 0; i--) {
   arrC1.push(arrABC[i]);
 }
-for (let i = 0; i < C1; i++) {
+for (let i = arrABC.length-1; i > arrABC.length-C2; i--) {
   arrC1.push(arrABC[i]);
 }
 
-for (let i = C2; i < arrABC.length; i++) {
+for (let i = arrABC.length-C1; i >= 0; i--) {
   arrC2.push(arrABC[i]);
 }
-for (let i = 0; i < C2; i++) {
+for (let i = arrABC.length-1; i > arrABC.length-C2; i--) {
   arrC2.push(arrABC[i]);
 }
 
@@ -53,7 +53,7 @@ mapC1[" "]= "X";
 mapC2[" "]= "X";
 
 for (let i = 0; i < arrABC.length; i++) {
-  mapC1[arrABC[i]] = arrC1[i];
+  mapC1[arrABC[i]] = arrC1[i];  
 }
 for (let i = 0; i < arrABC.length; i++) {
   mapC2[arrABC[i]] = arrC2[i];
