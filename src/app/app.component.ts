@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+type MapType = { [id: string]: string; }
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,9 +14,9 @@ export class AppComponent {
   seqStr = "C1C2C2C1C2"; // secuencia ingresada a cifrar
   C1: number = 5; // claves para mover el ABCdario
   C2: number = 19;
-  code: boolean = true; // Si es verdadero se cifra, sino se descifra
+  cifrar: boolean = true; // Si es verdadero se cifra, sino se descifra
   abc: string = "ABCDEFGHIJKLMNÑOPQRSTUVWYZ"
-
+  
   newSequence() : number[]{
     // Crea arreglo con la secuencia numérica
     var seqArr = this.seqStr.split('C'); // Esto quita todas las C's y deja un arreglo de sólo caracteres
@@ -39,17 +41,33 @@ export class AppComponent {
     return arr;
   }
 
-  newMap() : number[]{
+  newMap(K:number) : MapType{
+    var arrABC = this.abc.split('');
+    var arrK = this.moveArrayK(K);
+    var mapK: MapType = {};
+    mapK[" "]= "X";
+
+    if (this.cifrar) {
+      for (let i = 0; i < arrABC.length; i++) {
+        mapK[arrABC[i]] = arrK[i]; // Crea mapa de arrABC -> arrK
+      }  
+    }
+    else{
+      for (let i = 0; i < arrABC.length; i++) {
+        mapK[arrK[i]] = arrABC[i]; // Crea mapa de arrK -> arrABC
+      }
+    }
     
+    return mapK;
   }
 
-  Cifrar() : string{
+  algoritmoPolialfa() : string{
     var ltr = this.txt.split('');
     var seq : number[] = this.newSequence();
-    var mapC1: MapType = {};
-    var mapC2: MapType = {};
 
-    // Separa el texto ingresado por caracteres en un arreglo
+    type MapType = { [id: string]: string; }
+    var mapC1: MapType = this.newMap(this.C1);
+    var mapC2: MapType = this.newMap(this.C2);
   
     for (let i in ltr) {
       var j = +i%seq.length;
@@ -64,58 +82,6 @@ export class AppComponent {
       }
     }
     var str = ltr.join('');
-    console.log(str);
-  
     return str;
   }
-
-  Func() : type[]{
-    // return seqNum;
-  }
-}
-
-
-// Crear mapas que asocian "A" -> "H"
-type MapType = { [id: string]: string; }
-
-const mapC1: MapType = {};
-const mapC2: MapType = {};
-mapC1[" "]= "X";
-mapC2[" "]= "X";
-
-for (let i = 0; i < arrABC.length; i++) {
-  mapC1[arrABC[i]] = arrC1[i]; // Crea un diccioanrio/mapa que asocia los valores del abecedario al nuevo abecedario de C1
-} // ej mapC1["A"]=H
-for (let i = 0; i < arrABC.length; i++) {
-  mapC2[arrABC[i]] = arrC2[i];
-}
-
-// Función para cifrar el texto
-codeTxt(txt, seqNum, mapC1, mapC2);
-function codeTxt(txt: string, seq: number[], mapC1: MapType, mapC2: MapType) {
-  var ltr = txt.split('');
-  // Separa el texto ingresado por caracteres en un arreglo
-
-  for (let i in ltr) {
-    var j = +i%seq.length;
-    // esto es para llevar la cuenta de en que parte de la secuencia va C1C1C2C2C1
-    // dependiendo de la secuencia entra al if o al else
-    // y reemplaza el texto por el correspondiente
-    if (seq[j] == 1) {
-      ltr[i] = mapC1[ltr[i]];
-    }
-    else{
-      ltr[i] = mapC2[ltr[i]];
-    }
-  }
-  var str = ltr.join('');
-  console.log(str);
-
-  //return codedSentence;
-}
-
-// Función para descifrar el texto
-decodeTxt(txt, seqNum, mapC1, mapC2);
-function decodeTxt(txt: string, seq: number[], mapC1: MapType, mapC2: MapType) {
-
 }
