@@ -2,11 +2,6 @@ mat-slider {
     width: 300px;
   }
 
-.body{
-    background: rgb(92, 51, 51);
-    justify-content: left;
-    border: rgb(255, 255, 255);
-}
 
 .superior{
     background: rgb(92, 51, 51);
@@ -34,5 +29,5 @@ mat-slider {
 }
 
 .clave{
-    width: 500px;
+    width: 350px;
 }
