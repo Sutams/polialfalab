@@ -1,59 +1,82 @@
-<router-outlet></router-outlet>
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="body"> 
+ <!-- Navbar -->
+  <nav class="navbar">
     <!-- Container wrapper -->
-    <div class="container-fluid">
+    <div class="container-fluid superior">
       <!-- Navbar brand -->
-      <a class="navbar-brand"><img src=""></a>
-
-
-      <!-- Toggle button -->
-      <button class="navbar-toggler" type="button" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
+      <img class ="patito"src="/assets/img/patito.png" width="6%">
+      <h1>Cifrado Polialfabetico</h1> 
     </div>
     <!-- Container wrapper -->
   </nav>
   <!-- Navbar -->
-
+  <br><br>
+  
   <div class="container text-center">
     <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+    
     <div class="row">
-      <div class="col-md-8">
-        <p>Cifrar</p>
-        <form class="example-form">
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Ingrese texto a cifrar</mat-label>
-            <input matInput placeholder="HOLA MUNDO" value="">
-          </mat-form-field>
-        </form>
-      </div>
-
-      <div class="col-6 col-md-4">
-        <p>Descifrar</p>
-        <form class="example-form">
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Esperando texto a cifrar</mat-label>
-            <input matInput disabled="" value="">
-          </mat-form-field>
-        </form>
-
-      </div>
-    </div>
-    <button mat-raised-button>Cambiar</button>
-    <div class="col-md-8">
-      <p>parte abajo</p>
-      <button mat-raised-button>C1</button>
-      <button mat-raised-button>5</button>
       
-      <button mat-raised-button>C2</button>
-      <button mat-raised-button>19</button>
+      <div class="col-md-5 izquierda" >
+        <h1 [innerText]="cifrar ? 'Cifrar' : 'Descifrar'"></h1>
+        <div class="form-group">
+          <input type="text" class="form-control" [placeholder]="cifrar ? 'Ingrese texto Ej: HOLA MUNDO' : 'Ingrese texto cifrado'" required> 
+        </div> 
+      </div>
+
+      <div class="col-md-2 " >
+        <div class="example-button-container">
+          <button (click)="cambiarCifrar()"mat-fab color="warn" aria-label="Example icon button with a home icon">
+            <mat-icon>sync_alt</mat-icon>
+          </button>
+        </div>
+        <div class="example-button-container">
+          <button (click)="algoritmoPolialfa()"mat-fab color="" aria-label="Example icon button with a home icon">
+            <mat-icon>done</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-5 derecha">
+        <h1 [innerText]="cifrar ? 'Descifrar' : 'Cifrar'"></h1>
+        <div class="form-group">
+          <textarea class="form-control" readonly rows="3">{{txtOut}}</textarea> 
+        </div>
+      </div>
     </div>
 
-    <form class="example-form">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Secuencia</mat-label>
-        <input matInput placeholder="C1C2C2C1C1" value="">
-      </mat-form-field>
-    </form>
+  
+    <div class="row"> 
+
+      <div class="col-md-1 " >
+        <div class="example-button-row">
+          <button mat-raised-button color="warn">C1</button>
+        </div>
+      </div>
+      <div class="col-md-1 valorC1">
+        <input type="number" maxlength="2"class="form-control" placeholder="{{C1}}" min="2" max="26"> 
+      </div>
+      <div class="col-md-1 " >
+        <div class="example-button-row">
+          <button mat-raised-button color="warn">C2</button>
+        </div>
+      </div>
+      <div class="col-md-2 valorC2">
+        <input type="number" maxlength="2"class="form-control" placeholder="{{C2}}" min="2" max="26"> 
+      </div>
+    </div>
+    <br>
+    <div class="form-group clave">
+      <input type="text" class="form-control" placeholder="Ingrese la clave Ej: C1C1C2C1C2C1" required> 
+    </div>
+  
+    <br>
+    <!--Reglas-->
+      <h1>Reglas</h1>
+      <h3>- C1 y C2 puede tener valores entre 1 y 26</h3>
+      <h3>- Texto tiene que estar en mayuscula</h3>
+      <h3>- No se puede ocupar la letra X en el texto</h3>
+      <h3>- La clave puede tener entre 2 y 6 elementos conmbinados</h3>
+
+  </div>
+</div>

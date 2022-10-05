@@ -10,13 +10,24 @@ type MapType = { [id: string]: string; }
 export class AppComponent {
   title = 'polialfaLab';
   // Definición de las variables
-  txt: string = "HOLA MUNDO"; // texto a cifrar
-  seqStr = "C1C2C2C1C2"; // secuencia ingresada a cifrar
+  txt: string = ""; // texto a cifrar
+  seqStr = "C1C2C2C1"; // secuencia ingresada a cifrar
   C1: number = 5; // claves para mover el ABCdario
   C2: number = 19;
   cifrar: boolean = true; // Si es verdadero se cifra, sino se descifra
   abc: string = "ABCDEFGHIJKLMNÑOPQRSTUVWYZ"
-  
+  txtOut : string = "";
+
+  cambiarCifrar(){
+    if(this.cifrar){
+      this.cifrar = false;
+    }
+    else{
+      this.cifrar = true;
+    }    
+  }
+
+
   newSequence() : number[]{
     // Crea arreglo con la secuencia numérica
     var seqArr = this.seqStr.split('C'); // Esto quita todas las C's y deja un arreglo de sólo caracteres
@@ -61,10 +72,11 @@ export class AppComponent {
     return mapK;
   }
 
-  algoritmoPolialfa() : string{
+  algoritmoPolialfa() {
     var ltr = this.txt.split('');
     var seq : number[] = this.newSequence();
 
+    console.log(this.txt);
     type MapType = { [id: string]: string; }
     var mapC1: MapType = this.newMap(this.C1);
     var mapC2: MapType = this.newMap(this.C2);
@@ -82,6 +94,7 @@ export class AppComponent {
       }
     }
     var str = ltr.join('');
-    return str;
+    this.txtOut = str;
   }
 }
+
