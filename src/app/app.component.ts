@@ -27,6 +27,13 @@ export class AppComponent {
     }    
   }
 
+  aumentarC1(){
+    this.seqStr = this.seqStr + "C1";
+  }
+  
+  aumentarC2(){
+    this.seqStr = this.seqStr + "C2";
+  }
 
   newSequence() : number[]{
     // Crea arreglo con la secuencia numérica
@@ -56,14 +63,15 @@ export class AppComponent {
     var arrABC = this.abc.split('');
     var arrK = this.moveArrayK(K);
     var mapK: MapType = {};
-    mapK[" "]= "X";
 
     if (this.cifrar) {
+      mapK[" "]= "X";
       for (let i = 0; i < arrABC.length; i++) {
         mapK[arrABC[i]] = arrK[i]; // Crea mapa de arrABC -> arrK
       }  
     }
     else{
+      mapK["X"]= " ";
       for (let i = 0; i < arrABC.length; i++) {
         mapK[arrK[i]] = arrABC[i]; // Crea mapa de arrK -> arrABC
       }

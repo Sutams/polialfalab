@@ -20,9 +20,10 @@
       <div class="col-md-5 izquierda" >
         <h1 [innerText]="cifrar ? 'Cifrar' : 'Descifrar'"></h1>
         <div class="form-group">
-          <input type="text" class="form-control" [placeholder]="cifrar ? 'Ingrese texto Ej: HOLA MUNDO' : 'Ingrese texto cifrado'" required> 
+          <input type="text" class="form-control" [placeholder]="cifrar ? 'Ingrese texto Ej: HOLA MUNDO' : 'Ingrese texto cifrado'" required [(ngModel)]="txt">
         </div> 
       </div>
+      
 
       <div class="col-md-2 " >
         <div class="example-button-container">
@@ -31,7 +32,7 @@
           </button>
         </div>
         <div class="example-button-container">
-          <button (click)="algoritmoPolialfa()"mat-fab color="" aria-label="Example icon button with a home icon">
+          <button (click)="algoritmoPolialfa()" mat-fab color="" aria-label="Example icon button with a home icon">
             <mat-icon>done</mat-icon>
           </button>
         </div>
@@ -50,24 +51,24 @@
 
       <div class="col-md-1 " >
         <div class="example-button-row">
-          <button mat-raised-button color="warn">C1</button>
+          <button mat-raised-button color="warn" (click)="aumentarC1()">C1</button>
         </div>
       </div>
       <div class="col-md-1 valorC1">
-        <input type="number" maxlength="2"class="form-control" placeholder="{{C1}}" min="2" max="26"> 
+        <input type="number" maxlength="2"class="form-control" [(ngModel)]="C1" min="2" max="26"> 
       </div>
       <div class="col-md-1 " >
         <div class="example-button-row">
-          <button mat-raised-button color="warn">C2</button>
+          <button mat-raised-button color="warn" (click)="aumentarC2()">C2</button>
         </div>
       </div>
       <div class="col-md-2 valorC2">
-        <input type="number" maxlength="2"class="form-control" placeholder="{{C2}}" min="2" max="26"> 
+        <input type="number" maxlength="2"class="form-control" [(ngModel)]="C2" min="2" max="26"> 
       </div>
     </div>
     <br>
     <div class="form-group clave">
-      <input type="text" class="form-control" placeholder="Ingrese la clave Ej: C1C1C2C1C2C1" required> 
+      <input type="text" class="form-control" [(ngModel)]="seqStr" placeholder="Ingrese la clave Ej: C1C1C2C1C2C1" required> 
     </div>
   
     <br>
