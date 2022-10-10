@@ -12,12 +12,12 @@ export class AppComponent {
   title = 'polialfaLab';
   
   txt: string = ""; // texto de entrada
-  txtOut : string = ""; // texto salida
-  seqStr = ""; // secuencia a ingresar
+  txtOut : string = ""; // texto de salida
+  seqStr = ""; // secuencia a ingresar ej: C1C2C2C1
   C1: number = 5; // claves para mover el ABCdario
   C2: number = 19;
   cifrar: boolean = true; // si es verdadero se cifra, sino se descifra
-  abc: string = "ABCDEFGHIJKLMNÑOPQRSTUVWYZ"
+  abc: string = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ" // abecedario a utilizar
   
   cambiarCifrar(){
     this.txt = "";
@@ -58,10 +58,10 @@ export class AppComponent {
     var arrABC = this.abc.split(''); // Separa arreglo en cada letra
     var arr: string[] = []; // Crea arreglo vacío
     
-    for (let i = arrABC.length-K; i < arrABC.length; i++) {
+    for (let i = K; i < arrABC.length; i++) {
       arr.push(arrABC[i]); // Llena arreglo con ABC, empezando por la K posición
     }
-    for (let i = 0; i < arrABC.length-K; i++) {
+    for (let i = 0; i < K; i++) {
       arr.push(arrABC[i]); // Y luego llena los otros valores
     }
     return arr;
@@ -73,13 +73,11 @@ export class AppComponent {
     var mapK: MapType = {};
 
     if (this.cifrar) {
-      mapK[" "]= "X";
       for (let i = 0; i < arrABC.length; i++) {
         mapK[arrABC[i]] = arrK[i]; // Crea mapa de arrABC -> arrK
       }  
     }
     else{
-      mapK["X"]= " ";
       for (let i = 0; i < arrABC.length; i++) {
         mapK[arrK[i]] = arrABC[i]; // Crea mapa de arrK -> arrABC
       }
@@ -95,17 +93,27 @@ export class AppComponent {
           var ltr = this.txt.split('');
           var seq : number[] = this.newSequence();
           var mapC1: MapType = this.newMap(this.C1);
-          var mapC2: MapType = this.newMap(this.C2);    
+          var mapC2: MapType = this.newMap(this.C2); 
+
           for (let i in ltr) {
             var j = +i%seq.length;
             // esto es para llevar la cuenta de en que parte de la secuencia va C1C1C2C2C1
             // dependiendo de la secuencia entra al if o al else
             // y reemplaza el texto por el correspondiente
+            if (this.cifrar && ltr[i] == " "){
+              ltr[i] = "X";
+            }
+            console.log(ltr[i]);
+            
             if (seq[j] == 1) {
               ltr[i] = mapC1[ltr[i]];
             }
             else{
               ltr[i] = mapC2[ltr[i]];
+            }
+
+            if(!this.cifrar && ltr[i] == "X"){
+              ltr[i] = " ";
             }
           }
           var str = ltr.join('');
