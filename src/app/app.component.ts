@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 
-type MapType = { [id: string]: string; }
+// Definición de Tipo que relaciona una letra base a otra letra
+// Ej: A -> D, cuando K=3
+type Polialfabetico = { [LetraBase: string]: string; }
 
 @Component({
   selector: 'app-root',
@@ -8,17 +10,17 @@ type MapType = { [id: string]: string; }
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  // Definición de variables
   title = 'polialfaLab';
-  
-  txt: string = ""; // texto de entrada
-  txtOut : string = ""; // texto de salida
-  seqStr = ""; // secuencia a ingresar ej: C1C2C2C1
-  C1: number = 5; // claves para mover el ABCdario
-  C2: number = 19;
-  cifrar: boolean = true; // si es verdadero se cifra, sino se descifra
-  abc: string = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ" // abecedario a utilizar
-  
+  // Definición de variables a utilizar
+  txt = "";       // texto de entrada
+  txtOut = "";    // texto de salida
+  seqStr = "";    // secuencia ingresada Ej: C1C2C2C1
+  C1 = 5;         // claves K para mover el abecedario
+  C2 = 19;
+  cifrar = true;  // si es verdadero se cifra, sino se descifra
+  abc = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ" // abecedario a utilizar
+
+  // Función para cambiar de cifrado a descifrado
   cambiarCifrar(){
     this.txt = "";
     this.txtOut = "";
@@ -27,7 +29,7 @@ export class AppComponent {
     }
     else{
       this.cifrar = true;
-    }    
+    }
   }
 
   aumentarC1(){
@@ -35,7 +37,7 @@ export class AppComponent {
       this.seqStr = this.seqStr + "C1";
     }
   }
-  
+
   aumentarC2(){
     if(this.seqStr.length < 12){
       this.seqStr = this.seqStr + "C2";
@@ -52,12 +54,12 @@ export class AppComponent {
     seqNum.splice(0, 1); // Se saca el primer valor, que está indefinido
     return seqNum;
   }
-  
+
   // Mueve el arreglo ABC en K veces a la izquierda
-  moveArrayK(K:number) : string[]{ 
+  moveArrayK(K:number) : string[]{
     var arrABC = this.abc.split(''); // Separa arreglo en cada letra
     var arr: string[] = []; // Crea arreglo vacío
-    
+
     for (let i = K; i < arrABC.length; i++) {
       arr.push(arrABC[i]); // Llena arreglo con ABC, empezando por la K posición
     }
@@ -67,22 +69,22 @@ export class AppComponent {
     return arr;
   }
 
-  newMap(K:number) : MapType{
+  newMap(K:number) : Polialfabetico{
     var arrABC = this.abc.split('');
     var arrK = this.moveArrayK(K);
-    var mapK: MapType = {};
+    var mapK: Polialfabetico = {};
 
     if (this.cifrar) {
       for (let i = 0; i < arrABC.length; i++) {
         mapK[arrABC[i]] = arrK[i]; // Crea mapa de arrABC -> arrK
-      }  
+      }
     }
     else{
       for (let i = 0; i < arrABC.length; i++) {
         mapK[arrK[i]] = arrABC[i]; // Crea mapa de arrK -> arrABC
       }
     }
-    
+
     return mapK;
   }
 
@@ -92,8 +94,8 @@ export class AppComponent {
         if(this.seqStr.length >=4){
           var ltr = this.txt.split('');
           var seq : number[] = this.newSequence();
-          var mapC1: MapType = this.newMap(this.C1);
-          var mapC2: MapType = this.newMap(this.C2); 
+          var mapC1: Polialfabetico = this.newMap(this.C1);
+          var mapC2: Polialfabetico = this.newMap(this.C2);
 
           for (let i in ltr) {
             var j = +i%seq.length;
@@ -104,7 +106,7 @@ export class AppComponent {
               ltr[i] = "X";
             }
             console.log(ltr[i]);
-            
+
             if (seq[j] == 1) {
               ltr[i] = mapC1[ltr[i]];
             }
